@@ -1,0 +1,38 @@
+group 'com.evra'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    serenityCoreVersion = '2.3.12'
+    cucumberVersion = '6.9.1'
+    assertJVersion = '3.19.0'
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:2.3.12"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber6:${serenityCoreVersion}"
+    testImplementation "io.cucumber:cucumber-java8:${cucumberVersion}"
+    testImplementation "org.assertj:assertj-core:${assertJVersion}"
+}
+
+test {
+    systemProperties System.getProperties()
+}
+
+test.finalizedBy(aggregate)
