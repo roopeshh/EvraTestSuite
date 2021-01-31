@@ -1,9 +1,10 @@
 @login
 Feature: Testing login functionality
+
   Background:
     Given user is on the login page
 
-  @smoke @regression @implemented @1
+  @smoke @regression @implemented
   Scenario: To login with valid login credentials
     When user logs in with valid credentials
     Then user should be logged in to the app
